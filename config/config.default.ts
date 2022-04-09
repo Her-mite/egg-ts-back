@@ -14,14 +14,15 @@ export default (appInfo: EggAppInfo) => {
     },
   };
 
+
   // 配置mysql
   config.mysql = {
     client: {
-      host: '',
+      host: '1.117.188.206',
       port: '3306',
       // 用户名
       user: 'root',
-      password: '',
+      password: 'Qing9283',
       // 数据库名
       database: 'hujq_db',
     },
@@ -32,7 +33,7 @@ export default (appInfo: EggAppInfo) => {
   };
 
   // add your egg config in here
-  config.middleware = [];
+  config.middleware = [ 'errorHandler' ];
 
   // add your special config in here
   const bizConfig = {

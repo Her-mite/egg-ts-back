@@ -2,7 +2,7 @@
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
 name: Node.js CI
-
+# 触发条件
 on:
   push:
     branches:
@@ -12,27 +12,23 @@ on:
     branches:
       - main
       - master
-  schedule:
-    - cron: '0 2 * * *'
+  # schedule:
+  #   - cron: '0 2 * * *'
 
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
-
+    runs-on: self-hosted
     strategy:
       fail-fast: false
-      matrix:
-        node-version: [8]
-        os: [ubuntu-latest, windows-latest, macos-latest]
 
     steps:
     - name: Checkout Git Source
       uses: actions/checkout@v2
 
-    - name: Use Node.js ${{ matrix.node-version }}
+    - name: Use Node.js 12.x
       uses: actions/setup-node@v1
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: '12.x'
 
     - name: Install Dependencies
       run: npm i -g npminstall && npminstall
