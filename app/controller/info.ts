@@ -3,9 +3,9 @@ class InfoController extends Controller {
   // post请求获取网站信息
   public async getWebsiteInfo() {
     const { ctx, service } = this;
+    const tableName: string = ctx.query.tableName;
 
     // 获取路由上面预定义的参数
-    const tableName: string = ctx.request.body.tableName;
     if (!tableName || typeof (tableName) !== 'string') {
       throw ('table name error');
     }
@@ -30,19 +30,22 @@ class InfoController extends Controller {
     }
   }
 
-
-  // get 请求获取网站信息
-  public async getWebInfo() {
+  // 删除表指定一列
+  public async deleteDBSingleRow() {
     const { ctx, service } = this;
-    // 获取路由上面预定义的参数
-    const uid = ctx.query.uid || '';
-    const result = await service.info.getWebInfo(uid);
-    if (result) {
-      ctx.body = JSON.stringify(result);
-    } else {
-      ctx.body = 'can not find user!';
+    const { tableName, deleteCol, deleteValue } = ctx.request.body;
+    console.log('qweq', tableName, deleteCol, deleteValue);
+
+    try {
+      const result = await service.info.deleteDBSingleRow(tableName, deleteCol, deleteValue);
+      ctx.result = result;
+      console.log('qqqqq', result);
+
+    } catch (error) {
+      throw (error);
     }
   }
+
 }
 
 module.exports = InfoController;

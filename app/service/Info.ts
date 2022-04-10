@@ -15,9 +15,13 @@ class Info extends Service {
     return insertResult;
   }
 
-  public async getWebInfo(uid: string) {
-
-    return `this is ${uid}`;
+  // 删除指定数据
+  public async deleteDBSingleRow(tableName: string, tableCol: string, tableValue: string):Promise<EggMySQLUpdateResult> {
+    const { app } = this;
+    const deleteResult = await app.mysql.delete(tableName, {
+      [tableCol]: tableValue,
+    });
+    return deleteResult;
   }
 }
 module.exports = Info;
