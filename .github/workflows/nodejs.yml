@@ -36,7 +36,8 @@ jobs:
     - name: Continuous Integration
       run: npm run ci
 
-    - name: Code Coverage
-      uses: codecov/codecov-action@v1
-      with:
-        token: ${{ secrets.CODECOV_TOKEN }}
+    - name: Run tsc
+      run: npm run tsc
+
+    - name: Start
+      run: npm start
