@@ -14,15 +14,14 @@ export default (appInfo: EggAppInfo) => {
     },
   };
 
-
   // 配置mysql
   config.mysql = {
     client: {
-      host: '1.117.188.206',
+      host: '',
       port: '3306',
       // 用户名
       user: 'root',
-      password: 'Qing9283',
+      password: '',
       // 数据库名
       database: 'hujq_db',
     },
@@ -33,7 +32,41 @@ export default (appInfo: EggAppInfo) => {
   };
 
   // add your egg config in here
-  config.middleware = [ 'errorHandler' ];
+  config.middleware = ['errorHandler'];
+  config.errorHandler = {
+    ignore: ['/api/minio/downloadObject', '/api/minio/uploadObject'],
+  };
+
+  // 上传文件类型配置
+  config.multipart = {
+    fileExtensions: [
+      // images
+      '.jpg', '.jpeg', // image/jpeg
+      '.png', // image/png, image/x-png
+      '.gif', // image/gif
+      '.bmp', // image/bmp
+      '.wbmp', // image/vnd.wap.wbmp
+      '.webp',
+      '.tif',
+      '.psd',
+      // text
+      '.svg',
+      '.js', '.jsx',
+      '.json',
+      '.css', '.less',
+      '.html', '.htm',
+      '.txt',
+      '.xml',
+      // tar
+      '.zip',
+      '.gz', '.tgz', '.gzip',
+      // video
+      '.mp3',
+      '.mp4',
+      '.avi',
+      '.md',
+    ],
+  };
 
   // add your special config in here
   const bizConfig = {

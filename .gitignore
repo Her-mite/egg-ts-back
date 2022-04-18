@@ -12,6 +12,7 @@ logs/
 *.js
 !.autod.conf.js
 package-lock.json
+config.default.ts
 
 app/**/*.js
 test/**/*.js

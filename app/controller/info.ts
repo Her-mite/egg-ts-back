@@ -4,13 +4,14 @@ class InfoController extends Controller {
   public async getWebsiteInfo() {
     const { ctx, service } = this;
     const tableName: string = ctx.query.tableName;
+    const type: string = ctx.query.type;
 
     // 获取路由上面预定义的参数
     if (!tableName || typeof (tableName) !== 'string') {
       throw ('table name error');
     }
     // 调用service定义的方法
-    const result = await service.info.getWebsiteInfo(tableName);
+    const result = await service.info.getWebsiteInfo(tableName, type);
     if (result) {
       ctx.result = result;
     } else {
