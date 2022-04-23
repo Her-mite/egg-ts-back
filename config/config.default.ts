@@ -3,6 +3,13 @@ import { EggAppConfig, EggAppInfo, PowerPartial } from 'egg';
 export default (appInfo: EggAppInfo) => {
   const config = {} as PowerPartial<EggAppConfig>;
 
+  config.cluster = {
+    listen: {
+      path: '',
+      port: 7071,
+      hostname: '0.0.0.0',
+    },
+  };
   // override config from framework / plugin
   // use for cookie sign key, should change to your own and keep security
   config.keys = appInfo.name + '_1649260408904_4081';
@@ -17,11 +24,11 @@ export default (appInfo: EggAppInfo) => {
   // 配置mysql
   config.mysql = {
     client: {
-      host: '',
+      host: '1.117.188.206',
       port: '3306',
       // 用户名
       user: 'root',
-      password: '',
+      password: 'Qing9283',
       // 数据库名
       database: 'hujq_db',
     },
