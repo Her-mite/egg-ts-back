@@ -17,5 +17,6 @@ export default (app: Application) => {
 
   // 文件信息
   router.get('/api/file/getCurrentFiles', controller.file.getCurrentFiles);
+  router.get('/api/file/getFileContent', controller.file.getFileContent);
 
 };

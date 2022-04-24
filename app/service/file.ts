@@ -26,6 +26,10 @@ class File extends Service {
     return fileArray;
   }
 
+  public async getFileContent(filePath: string) {
+    const data = fs.readFileSync(filePath, 'utf8');
+    return data;
+  }
 
 }
 module.exports = File;

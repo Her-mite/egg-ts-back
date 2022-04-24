@@ -14,6 +14,18 @@ class InfoController extends Controller {
     }
   }
 
+  public async getFileContent() {
+    const { ctx, service } = this;
+    const filePath = ctx.query.filePath;
+
+    const result = await service.file.getFileContent(filePath);
+    if (result) {
+      ctx.result = result;
+    } else {
+      throw ('result empty');
+    }
+  }
+
 }
 
 module.exports = InfoController;
