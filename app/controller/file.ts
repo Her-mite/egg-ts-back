@@ -1,5 +1,6 @@
 import { Controller } from 'egg';
 class InfoController extends Controller {
+  // 获取当前文件夹信息
   public async getCurrentFiles() {
     const { ctx, service } = this;
     const currentPath: string = ctx.query.currentPath;
@@ -14,6 +15,7 @@ class InfoController extends Controller {
     }
   }
 
+  // 获取指定文件内容
   public async getFileContent() {
     const { ctx, service } = this;
     const filePath = ctx.query.filePath;
@@ -24,6 +26,13 @@ class InfoController extends Controller {
     } else {
       throw ('result empty');
     }
+  }
+
+  // 下载本地文件
+  public async downloadFile() {
+    const { ctx, service } = this;
+    const { fileName, localFileName } = ctx.request.body;
+    await service.file.downloadFile(fileName, localFileName);
   }
 
 }

@@ -26,9 +26,19 @@ class File extends Service {
     return fileArray;
   }
 
+  // 获取指定文件内容
   public async getFileContent(filePath: string) {
     const data = fs.readFileSync(filePath, 'utf8');
     return data;
+  }
+
+  // 下载本地文件
+  public async downloadFile(fileName: string, localFileName: string) {
+    const { ctx } = this;
+    console.log(fileName, localFileName);
+    ctx.attachment(fileName);
+    ctx.set('Content-Type', 'application/octet-stream');
+    ctx.body = fs.createReadStream(localFileName);
   }
 
 }

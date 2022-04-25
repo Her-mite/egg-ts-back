@@ -41,7 +41,7 @@ export default (appInfo: EggAppInfo) => {
   // add your egg config in here
   config.middleware = ['errorHandler'];
   config.errorHandler = {
-    ignore: ['/api/minio/downloadObject', '/api/minio/uploadObject'],
+    ignore: ['/api/minio/downloadObject', '/api/minio/uploadObject', '/api/file/download*'],
   };
 
   // 上传文件类型配置
