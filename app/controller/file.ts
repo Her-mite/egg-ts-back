@@ -35,6 +35,16 @@ class InfoController extends Controller {
     await service.file.downloadFile(fileName, localFileName);
   }
 
+  // 上传文件
+  public async uploadFile() {
+    const result = this.service.file.uploadFile();
+    if (result) {
+      this.ctx.result = result;
+    } else {
+      throw ('result empty');
+    }
+  }
+
 }
 
 module.exports = InfoController;

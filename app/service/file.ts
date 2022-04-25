@@ -16,7 +16,7 @@ class File extends Service {
     const fileArray: string[] = await filePromise;
     if (queryType === 'folder') {
       const folderArray = fileArray.filter(item => {
-        if (item.includes('.')) {
+        if (!item.includes('.')) {
           return item;
         }
         return false;
@@ -41,5 +41,30 @@ class File extends Service {
     ctx.body = fs.createReadStream(localFileName);
   }
 
+  // 上传本地文件
+  public async uploadFile() {
+    const stream = await this.ctx.getFileStream();
+
+    // 获取上传路径和文件名
+    const uploadFileName = stream.filename;
+    const uploadFolderPath = stream.fields.uploadFolderPath;
+    const target = uploadFolderPath + '/' + uploadFileName;
+
+    const result = await new Promise((resolve, reject) => {
+      const remoteFileStream = fs.createWriteStream(target);
+      stream.pipe(remoteFileStream);
+      // 监听error事件
+      remoteFileStream.on('error', err => {
+        console.log('pipError', err);
+        reject(err);
+      });
+
+      // 监听写入完成事件
+      remoteFileStream.on('finish', () => {
+        resolve({ filename: uploadFileName, path: target });
+      });
+    });
+    return result;
+  }
 }
 module.exports = File;
