@@ -66,5 +66,11 @@ class File extends Service {
     });
     return result;
   }
+
+  // 写入文件
+  public async writeFile(dataString: string, filePath: string) {
+    fs.writeFileSync(filePath, dataString);
+    return '写入成功';
+  }
 }
 module.exports = File;

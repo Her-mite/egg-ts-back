@@ -45,6 +45,18 @@ class InfoController extends Controller {
     }
   }
 
+  // 写入文件
+  public async writeFile() {
+    const { ctx, service } = this;
+    const { dataString, filePath } = ctx.request.body;
+    const result = service.file.writeFile(dataString, filePath);
+    if (result) {
+      this.ctx.result = result;
+    } else {
+      throw ('result empty');
+    }
+  }
+
 }
 
 module.exports = InfoController;

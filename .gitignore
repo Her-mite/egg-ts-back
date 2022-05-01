@@ -18,6 +18,7 @@ config.default.ts
 app/**/*.js
 test/**/*.js
 config/**/*.js
+config/config.sensitive.ts
 app/**/*.map
 test/**/*.map
 config/**/*.map

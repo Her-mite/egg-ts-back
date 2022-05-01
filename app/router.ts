@@ -20,4 +20,5 @@ export default (app: Application) => {
   router.get('/api/file/getFileContent', controller.file.getFileContent);
   router.post('/api/file/downloadFile', controller.file.downloadFile);
   router.post('/api/file/uploadFile', controller.file.uploadFile);
+  router.post('/api/file/writeFile', controller.file.writeFile);
 };

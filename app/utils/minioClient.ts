@@ -1,13 +1,6 @@
 import Minio = require('minio');
+import { minioConfig } from '../../config/config.sensitive';
 
-const minioClient = new Minio.Client({
-  accessKey: 'hujq',
-  secretKey: '',
-  bucket: 'software',
-  endPoint: '',
-  timeout: '60s',
-  port: 9000,
-  useSSL: false,
-});
+const minioClient = new Minio.Client(minioConfig);
 
 export default minioClient;

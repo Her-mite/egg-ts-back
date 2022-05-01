@@ -1,4 +1,5 @@
 import { EggAppConfig, EggAppInfo, PowerPartial } from 'egg';
+import { mysqlConfig } from './config.sensitive';
 
 export default (appInfo: EggAppInfo) => {
   const config = {} as PowerPartial<EggAppConfig>;
@@ -23,15 +24,7 @@ export default (appInfo: EggAppInfo) => {
 
   // 配置mysql
   config.mysql = {
-    client: {
-      host: '1.117.188.206',
-      port: '3306',
-      // 用户名
-      user: 'root',
-      password: 'Qing9283',
-      // 数据库名
-      database: 'hujq_db',
-    },
+    client: mysqlConfig,
     // 是否加载到 app 上,默认开启
     app: true,
     // 是否加载到 agent 上,默认关闭
