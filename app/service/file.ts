@@ -1,5 +1,7 @@
 import { Service } from 'egg';
 import fs = require('fs');
+import child_process = require('child_process');
+
 
 class File extends Service {
   // 获取当前目录下文件和文件夹名
@@ -71,6 +73,22 @@ class File extends Service {
   public async writeFile(dataString: string, filePath: string) {
     fs.writeFileSync(filePath, dataString);
     return '写入成功';
+  }
+
+  // 执行python
+  public async execPython(pythonPath: string, args: string[], resultPath?: string) {
+    console.log(`python3 ${pythonPath} ${args[0]} ${args[1]} "${args[2]}"`);
+    child_process.execSync(`python3 ${pythonPath} ${args[0]} ${args[1]} "${args[2]}"`);
+    if (resultPath) {
+      const result = await this.getFileContent(resultPath);
+      console.log(result, resultPath);
+
+      return result;
+    }
+    console.log(resultPath);
+
+    return '执行完成';
+
   }
 }
 module.exports = File;

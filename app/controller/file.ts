@@ -57,6 +57,21 @@ class InfoController extends Controller {
     }
   }
 
+  // 执行python脚本
+  public async execPython() {
+    const { ctx, service } = this;
+    const { pythonPath, args, resultPath } = ctx.request.body;
+
+    const result = await service.file.execPython(pythonPath, args, resultPath);
+    if (result) {
+      console.log('resl', result);
+
+      this.ctx.result = result;
+    } else {
+      throw ('result empty');
+    }
+  }
+
 }
 
 module.exports = InfoController;
