@@ -24,6 +24,14 @@ class File extends Service {
         return false;
       });
       return folderArray;
+    } else if (queryType === 'mp3') {
+      const folderArray = fileArray.filter(item => {
+        if (!item.includes('.') || item.includes('mp3')) {
+          return item;
+        }
+        return false;
+      });
+      return folderArray;
     }
     return fileArray;
   }
@@ -50,6 +58,8 @@ class File extends Service {
     // 获取上传路径和文件名
     const uploadFileName = stream.filename;
     const uploadFolderPath = stream.fields.uploadFolderPath;
+    console.log('path', uploadFolderPath + '/' + uploadFileName);
+
     const target = uploadFolderPath + '/' + uploadFileName;
 
     const result = await new Promise((resolve, reject) => {
